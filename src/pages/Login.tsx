@@ -1,34 +1,44 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import AuthAside from "../components/AuthAside";
 import { GoogleIcon, AppleIcon } from "../components/BrandIcons";
 
+interface FormState {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
 export default function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState<FormState>({ email: "", password: "" });
   const [showPw, setShowPw] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const navigate = useNavigate();
 
-  const set = (key) => (e) => {
+  const set = (key: keyof FormState) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     if (errors[key]) setErrors({ ...errors, [key]: "" });
   };
 
-  const validate = () => {
-    const err = {};
+  const validate = (): FormErrors => {
+    const err: FormErrors = {};
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       err.email = "Enter a valid email address";
     if (form.password.length < 1) err.password = "Password is required";
     return err;
   };
 
-  const submit = (e) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const err = validate();
     setErrors(err);
     if (Object.keys(err).length === 0) {
-      // In a real app: API call, set token, redirect
+      // Portfolio demo: no backend, no real session — just route home.
       navigate("/");
     }
   };
@@ -61,10 +71,11 @@ export default function Login() {
 
           <form onSubmit={submit} noValidate>
             <div className="form-field">
-              <label>Email address</label>
+              <label htmlFor="login-email">Email address</label>
               <div className={`input ${errors.email ? "err" : ""}`}>
                 <Mail size={18} />
                 <input
+                  id="login-email"
                   type="email"
                   placeholder="you@example.com"
                   value={form.email}
@@ -75,7 +86,7 @@ export default function Login() {
             </div>
 
             <div className="form-field">
-              <label>
+              <label htmlFor="login-password">
                 Password
                 <a href="#forgot" className="forgot-link">
                   Forgot?
@@ -84,6 +95,7 @@ export default function Login() {
               <div className={`input ${errors.password ? "err" : ""}`}>
                 <Lock size={18} />
                 <input
+                  id="login-password"
                   type={showPw ? "text" : "password"}
                   placeholder="Enter your password"
                   value={form.password}
@@ -103,7 +115,7 @@ export default function Login() {
               )}
             </div>
 
-            <button type="submit" className="btn btn-orange btn-block btn-lg">
+            <button type="submit" className="btn btn-lime btn-block btn-lg">
               Log in
             </button>
           </form>

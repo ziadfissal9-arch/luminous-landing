@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   Mail,
@@ -11,35 +11,39 @@ import {
 } from "lucide-react";
 import AuthAside from "../components/AuthAside";
 import { GoogleIcon, AppleIcon } from "../components/BrandIcons";
-
-// Password strength: 0-4 based on length + variety
-function scorePassword(pw) {
-  let score = 0;
-  if (pw.length >= 8) score++;
-  if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
-  if (/\d/.test(pw)) score++;
-  if (/[^A-Za-z0-9]/.test(pw)) score++;
-  return score;
-}
+import { scorePassword } from "../hooks";
 
 const STRENGTH = ["", "Weak", "Fair", "Good", "Strong"];
 
+interface FormState {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  agree?: string;
+}
+
 export default function Signup() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState<FormState>({ name: "", email: "", password: "" });
   const [agree, setAgree] = useState(false);
   const [showPw, setShowPw] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [done, setDone] = useState(false);
 
   const strength = scorePassword(form.password);
 
-  const set = (key) => (e) => {
+  const set = (key: keyof FormState) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     if (errors[key]) setErrors({ ...errors, [key]: "" });
   };
 
-  const validate = () => {
-    const err = {};
+  const validate = (): FormErrors => {
+    const err: FormErrors = {};
     if (form.name.trim().length < 2) err.name = "Please enter your full name";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       err.email = "Enter a valid email address";
@@ -49,7 +53,7 @@ export default function Signup() {
     return err;
   };
 
-  const submit = (e) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const err = validate();
     setErrors(err);
@@ -65,17 +69,20 @@ export default function Signup() {
             <div className="success-icon">
               <CheckCircle2 size={40} />
             </div>
-            <h1>Welcome aboard, {form.name.split(" ")[0]}! 🎉</h1>
+            <h1>Welcome aboard, {form.name.split(" ")[0]}!</h1>
             <p className="auth-sub">
-              Your account has been created successfully. Check{" "}
-              <b>{form.email}</b> to verify your email and get started.
+              Your account details for <b>{form.email}</b> look good.
             </p>
-            <Link to="/" className="btn btn-orange btn-block">
+            <Link to="/" className="btn btn-lime btn-block">
               Go to Dashboard
             </Link>
             <Link to="/login" className="auth-link-center">
               Back to Log In
             </Link>
+            <p className="demo-note">
+              This is a portfolio demo — no account was created and no email
+              was sent.
+            </p>
           </div>
         </main>
       </div>
@@ -110,10 +117,11 @@ export default function Signup() {
 
           <form onSubmit={submit} noValidate>
             <div className="form-field">
-              <label>Full name</label>
+              <label htmlFor="signup-name">Full name</label>
               <div className={`input ${errors.name ? "err" : ""}`}>
                 <User size={18} />
                 <input
+                  id="signup-name"
                   type="text"
                   placeholder="Ziad Fissal"
                   value={form.name}
@@ -124,10 +132,11 @@ export default function Signup() {
             </div>
 
             <div className="form-field">
-              <label>Email address</label>
+              <label htmlFor="signup-email">Email address</label>
               <div className={`input ${errors.email ? "err" : ""}`}>
                 <Mail size={18} />
                 <input
+                  id="signup-email"
                   type="email"
                   placeholder="you@example.com"
                   value={form.email}
@@ -138,10 +147,11 @@ export default function Signup() {
             </div>
 
             <div className="form-field">
-              <label>Password</label>
+              <label htmlFor="signup-password">Password</label>
               <div className={`input ${errors.password ? "err" : ""}`}>
                 <Lock size={18} />
                 <input
+                  id="signup-password"
                   type={showPw ? "text" : "password"}
                   placeholder="At least 8 characters"
                   value={form.password}
@@ -196,7 +206,7 @@ export default function Signup() {
             </label>
             {errors.agree && <span className="field-err">{errors.agree}</span>}
 
-            <button type="submit" className="btn btn-orange btn-block btn-lg">
+            <button type="submit" className="btn btn-lime btn-block btn-lg">
               Create account
             </button>
           </form>

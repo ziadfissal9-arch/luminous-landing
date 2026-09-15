@@ -1,18 +1,20 @@
-import { useState } from "react";
-import {
-  Sparkles,
-  Send,
-  Globe,
-  MessageCircle,
-  AtSign,
-  Mail,
-} from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { Sparkles, Send } from "lucide-react";
+import { XIcon, InstagramIcon, LinkedinIcon } from "./BrandIcons";
+
+const SOCIALS = [
+  { Icon: XIcon, label: "X (Twitter)" },
+  { Icon: InstagramIcon, label: "Instagram" },
+  { Icon: LinkedinIcon, label: "LinkedIn" },
+];
+
+const YEAR = new Date().getFullYear();
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
 
-  const submit = (e) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email.trim()) return;
     setSent(true);
@@ -25,9 +27,7 @@ export default function Footer() {
       <div className="container">
         <div className="final-cta">
           <div>
-            <span className="eyebrow" style={{ color: "#fb923c" }}>
-              Get in touch
-            </span>
+            <span className="eyebrow">Get in touch</span>
             <h2>Ready to Get Started?</h2>
           </div>
 
@@ -40,12 +40,12 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <button type="submit" className="btn btn-orange btn-icon" aria-label="Send">
+              <button type="submit" className="btn btn-lime btn-icon" aria-label="Send">
                 <Send size={18} />
               </button>
             </form>
             {sent && (
-              <p style={{ marginTop: 12, fontSize: 14, color: "#7bb23f" }}>
+              <p style={{ marginTop: 12, fontSize: 14, color: "var(--lime)" }}>
                 ✓ Thanks! We'll be in touch soon.
               </p>
             )}
@@ -53,18 +53,11 @@ export default function Footer() {
             <div className="footer-social">
               <div className="footer-social-label">Social Media</div>
               <div className="social-row">
-                <button className="social-btn" aria-label="Twitter">
-                  <Globe size={18} />
-                </button>
-                <button className="social-btn" aria-label="Facebook">
-                  <MessageCircle size={18} />
-                </button>
-                <button className="social-btn" aria-label="Instagram">
-                  <AtSign size={18} />
-                </button>
-                <button className="social-btn" aria-label="LinkedIn">
-                  <Mail size={18} />
-                </button>
+                {SOCIALS.map(({ Icon, label }) => (
+                  <a href="#" key={label} className="social-btn" aria-label={label}>
+                    <Icon size={16} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -77,7 +70,7 @@ export default function Footer() {
             </span>
             luminous
           </div>
-          <div>© 2026 Luminous. All rights reserved.</div>
+          <div>© {YEAR} Luminous. All rights reserved.</div>
           <div>Built by Ziad Fissal</div>
         </div>
       </div>

@@ -7,9 +7,17 @@ import {
   TrendingUp,
   Eye,
 } from "lucide-react";
+import type {
+  Feature,
+  NavLink,
+  Plan,
+  ReturnPoint,
+  Stat,
+  Testimonial,
+} from "./types";
 
 // ===== Navigation =====
-export const navLinks = [
+export const navLinks: NavLink[] = [
   { label: "Home", href: "#home" },
   { label: "Features", href: "#features" },
   { label: "Resources", href: "#experience" },
@@ -18,10 +26,10 @@ export const navLinks = [
 ];
 
 // ===== Trusted-by companies (rendered as clean wordmarks) =====
-export const logos = ["Vertex", "Nimbus", "Quanta", "Lumen", "Orbit", "Stride"];
+export const logos: string[] = ["Vertex", "Nimbus", "Quanta", "Lumen", "Orbit", "Stride"];
 
 // ===== Hero stats (the 4 metrics row) =====
-export const stats = [
+export const stats: Stat[] = [
   { value: "49%", label: "Revenue business", sub: "Maximize your earning potential with smart tools" },
   { value: "250K", label: "In annual revenue", sub: "Financial tools designed to boost your revenue" },
   { value: "89+", label: "Month of runway", sub: "From expense management to profit forecasting" },
@@ -29,7 +37,7 @@ export const stats = [
 ];
 
 // ===== Features (How it works) =====
-export const features = [
+export const features: Feature[] = [
   {
     icon: Send,
     title: "Free Transfers",
@@ -57,14 +65,14 @@ export const features = [
 ];
 
 // ===== Returns / reserve account checklist =====
-export const returnPoints = [
+export const returnPoints: ReturnPoint[] = [
   { icon: Wallet, text: "Open your accounts" },
   { icon: TrendingUp, text: "Transfer your money" },
   { icon: Eye, text: "Watch your balance grow" },
 ];
 
 // ===== Pricing =====
-export const plans = [
+export const plans: Plan[] = [
   {
     name: "Basic",
     price: "0",
@@ -73,7 +81,7 @@ export const plans = [
     features: [
       "Access to standard financial tools",
       "Personalized recommendations based on your preferences",
-      "Ability to explore the app, and features without any cost",
+      "Explore the app and every feature at no cost",
     ],
   },
   {
@@ -83,8 +91,8 @@ export const plans = [
     featured: true,
     features: [
       "Access to advanced financial tools and analytics",
-      "Priority customer support any time",
-      "Utility support: real-time reports and quality",
+      "Priority customer support, any time",
+      "Real-time reports and reconciliation",
     ],
   },
   {
@@ -93,15 +101,15 @@ export const plans = [
     tagline: "Custom solutions for larger teams",
     featured: false,
     features: [
-      "AI-chatbot that can understand your queries",
-      "Personalized recommendations based on preferences",
-      "Ability to explore the app and features without cost",
+      "Dedicated account manager and onboarding",
+      "Custom integrations and single sign-on (SSO)",
+      "Volume-based pricing across your organization",
     ],
   },
 ];
 
 // ===== Testimonials =====
-export const testimonials = [
+export const testimonials: Testimonial[] = [
   {
     quote:
       "Keeping track of my expenses and investments was always a hassle, but now with Luminous everything just clicks. It pays for itself.",
@@ -126,14 +134,14 @@ export const testimonials = [
 ];
 
 // ===== Sign-up side panel benefits =====
-export const authBenefits = [
+export const authBenefits: string[] = [
   "No credit card required to start",
   "Bank-level 256-bit encryption",
   "Cancel anytime, no questions asked",
 ];
 
 // Avatars used for social proof (hero + auth pages)
-export const proofAvatars = [
+export const proofAvatars: string[] = [
   "https://randomuser.me/api/portraits/men/12.jpg",
   "https://randomuser.me/api/portraits/women/68.jpg",
   "https://randomuser.me/api/portraits/men/45.jpg",

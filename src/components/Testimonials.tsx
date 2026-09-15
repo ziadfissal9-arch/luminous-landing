@@ -1,4 +1,4 @@
-import { Star, ArrowLeft, ArrowRight } from "lucide-react";
+import { Star } from "lucide-react";
 import { testimonials } from "../data";
 import { useReveal } from "../hooks";
 
@@ -12,14 +12,6 @@ export default function Testimonials() {
           <div>
             <span className="eyebrow">Testimonials</span>
             <h2 className="section-title">Customer Testimonials</h2>
-          </div>
-          <div className="testi-nav">
-            <button className="btn btn-icon btn-light" aria-label="Previous">
-              <ArrowLeft size={18} />
-            </button>
-            <button className="btn btn-icon btn-dark" aria-label="Next">
-              <ArrowRight size={18} />
-            </button>
           </div>
         </div>
 

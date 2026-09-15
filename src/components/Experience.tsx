@@ -17,7 +17,7 @@ export default function Experience() {
             <span className="dot" />
             120+ Trusted Clients
           </div>
-          <div className="exp-note">Make money good is a deposit</div>
+          <div className="exp-note">Your money, working harder</div>
         </div>
 
         {/* Text + checklist */}

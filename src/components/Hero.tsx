@@ -39,12 +39,12 @@ export default function Hero() {
 
           <div>
             <div className="hero-cta-row">
-              <Link to="/signup" className="btn btn-white">
+              <Link to="/signup" className="btn btn-dark">
                 Sign up for free
               </Link>
               <a
                 href="#features"
-                className="btn btn-icon btn-white"
+                className="btn btn-icon btn-dark"
                 aria-label="Learn more"
               >
                 <ArrowUpRight size={20} />

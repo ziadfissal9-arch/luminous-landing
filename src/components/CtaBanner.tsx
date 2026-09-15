@@ -11,7 +11,7 @@ export default function CtaBanner() {
             tools, and real-time insights to keep growing.
           </p>
         </div>
-        <a href="#pricing" className="btn btn-orange">
+        <a href="#pricing" className="btn btn-lime">
           Get Started
           <ArrowRight size={18} />
         </a>

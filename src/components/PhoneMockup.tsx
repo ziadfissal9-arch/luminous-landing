@@ -1,10 +1,4 @@
-import {
-  Send,
-  ShoppingBag,
-  Smartphone,
-  Zap,
-  PiggyBank,
-} from "lucide-react";
+import { Send, ShoppingBag, Smartphone, Zap } from "lucide-react";
 
 // A pure-CSS finance-app phone mockup used inside the hero visual card.
 export default function PhoneMockup() {
@@ -42,11 +36,11 @@ export default function PhoneMockup() {
 
         <div className="phone-row">
           <span>Shopping</span>
-          <b>-$240</b>
+          <b className="negative">-$240</b>
         </div>
         <div className="phone-row">
           <span>Top up</span>
-          <b>+$980</b>
+          <b className="positive">+$980</b>
         </div>
       </div>
     </div>
