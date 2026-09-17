@@ -2,7 +2,7 @@
 
 A marketing site for a fintech product — hero, trusted-by strip, feature grid, live stats, product experience section, pricing, testimonials, and auth pages (login/signup). Built as a portfolio project to demonstrate a distinctive, fully custom visual identity and production-grade front-end engineering: strict TypeScript, real component tests, accessibility basics, and route-based code splitting.
 
-**Live demo:** _add your Vercel URL here_
+**Live demo:** [https://luminous-landing.vercel.app](https://luminous-landing.vercel.app)
 
 ![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white)
